@@ -44,7 +44,8 @@ else
     fi
 
     if [ ${SET_PROXY} -eq 1 ]; then
-        jq '. += {"proxies":{"default":[{"httpProxy":"'${PROXY}'"},{"httpsProxy":"'${PROXY}'"}]}}' <${USER_DOCKER_CONFIG} >${TMP_JSON} && mv ${TMP_JSON} ${USER_DOCKER_CONFIG}
+        jq '. += {"proxies":{"default":{"httpProxy":"'${PROXY}'","httpsProxy":"'${PROXY}'"}}}' <${USER_DOCKER_CONFIG} >${TMP_JSON} && mv ${TMP_JSON} ${USER_DOCKER_CONFIG}
+
     else
         jq 'del(.proxies)' <${USER_DOCKER_CONFIG} >${TMP_JSON} && mv ${TMP_JSON} ${USER_DOCKER_CONFIG}
     fi
